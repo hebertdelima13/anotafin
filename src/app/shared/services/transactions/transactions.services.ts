@@ -1,4 +1,4 @@
-import { Injectable, computed, inject, signal } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { TransactionsInterface } from '../../interface/transactions.interface';
 import {
   addDoc,
@@ -10,6 +10,7 @@ import {
   query,
   orderBy,
   updateDoc,
+  where,
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Auth } from '@angular/fire/auth';
@@ -23,11 +24,18 @@ export class TransactionsServices {
   ref = collection(this.fireStores, 'transactions');
 
   addTransaction(transaction: TransactionsInterface) {
-    return addDoc(this.ref, { transaction });
+    const user = this.auth.currentUser;
+    if (!user) throw new Error('Usuário não autenticado');
+
+    return addDoc(this.ref, {
+      uid: user.uid,
+      transaction,
+    });
   }
 
-  getTransactions(): Observable<TransactionsInterface[]> {
-    const q = query(this.ref, orderBy('transaction.date', 'asc'));
+  getTransactionsByUid(uid: string): Observable<TransactionsInterface[]> {
+    const q = query(this.ref, where('uid', '==', uid), orderBy('transaction.date', 'asc'));
+
     return collectionData(q, { idField: 'id' }) as Observable<TransactionsInterface[]>;
   }
 

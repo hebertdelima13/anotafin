@@ -1,13 +1,14 @@
 import { Injectable, inject, signal, computed } from '@angular/core';
 import { TransactionsServices } from '../services/transactions/transactions.services';
 import { TransactionRow, TransactionsInterface } from '../interface/transactions.interface';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
+import { AuthService } from '../../core/services/auth/auth.service';
+import { of, switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TransactionsStore {
-  private service = inject(TransactionsServices);
-
   monthNames = [
     'Janeiro',
     'Fevereiro',
@@ -23,29 +24,39 @@ export class TransactionsStore {
     'Dezembro',
   ];
 
+  private service = inject(TransactionsServices);
+  private authService = inject(AuthService);
+
   private _transactions = signal<TransactionsInterface[]>([]);
   transactions = this._transactions.asReadonly();
-
   public isLoading = signal<boolean>(true);
   public rowLoading = signal<string | 'new' | null>(null);
   public paidRowLoading = signal<string | null>(null);
 
   selectedYear = signal(new Date().getFullYear());
-  selectedMonth = signal(new Date().getMonth()); 
+  selectedMonth = signal(new Date().getMonth());
 
   editingRow = signal<TransactionRow | null>(null);
 
   constructor() {
-    this.service.getTransactions().subscribe({
-      next: (data) =>
-        queueMicrotask(() => {
-          this._transactions.set(data);
-          this.isLoading.set(false);
-        }),
-      error: () => {
+    toObservable(this.authService.user)
+      .pipe(
+        takeUntilDestroyed(),
+        switchMap((user) => {
+          if (!user) {
+            this._transactions.set([]);
+            this.isLoading.set(false);
+            return of([]);
+          }
+
+          this.isLoading.set(true);
+          return this.service.getTransactionsByUid(user.uid);
+        })
+      )
+      .subscribe((data) => {
+        this._transactions.set(data);
         this.isLoading.set(false);
-      },
-    });
+      });
   }
 
   selectedMonthLabel = computed(() => this.monthNames[this.selectedMonth()]);
