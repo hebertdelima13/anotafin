@@ -1,0 +1,39 @@
+<div class="container">
+  <form class="form-container" [formGroup]="authForm" (ngSubmit)="login()">
+    <mat-form-field>
+      <input matInput formControlName="email" autocomplete="username" placeholder="E-mail" />
+      <mat-icon matPrefix>email</mat-icon>
+      @if (authForm.controls.email.invalid) {
+      <mat-error> Campo inválido </mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field>
+      <input
+        matInput
+        formControlName="senha"
+        [type]="hide() ? 'password' : 'text'"
+        autocomplete="current-password"
+        placeholder="Senha"
+      />
+      @if (authForm.controls.senha.invalid) {
+      <mat-error> Campo inválido </mat-error>
+      }
+      <mat-icon matPrefix>key</mat-icon>
+      <button
+        type="button"
+        matIconButton
+        matSuffix
+        (click)="showPassword()"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide()"
+      >
+        <mat-icon>{{ hide() ? 'visibility_off' : 'visibility' }}</mat-icon>
+      </button>
+    </mat-form-field>
+    @if (error()) {
+    <mat-error> {{ error() }} </mat-error>
+    }
+    <button class="submit-button" matButton="filled" [disabled]="authForm.invalid">Entrar</button>
+  </form>
+</div>

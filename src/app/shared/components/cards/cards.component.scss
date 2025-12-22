@@ -1,0 +1,33 @@
+@use '../../assets/scss/mixins' as *;
+
+mat-card {
+  @include md {
+      margin: .5rem .5rem;
+    }
+  mat-card-content {
+    display: flex;
+    mat-icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #006d33;
+      color: #fff;
+      font-size: 2rem;
+      height: 3rem;
+      width: 3rem;
+      border-radius: 0.5rem;
+    }
+
+    .card-content {
+      margin-left: 0.5rem;
+      p {
+        font-size: 1rem;
+      }
+
+      span {
+        font-weight: 900;
+        font-size: 1.5rem;
+      }
+    }
+  }
+}

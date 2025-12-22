@@ -1,0 +1,29 @@
+@use '@angular/material' as mat;
+
+/* Seed Colors: primary: #4BDEDB, secondary: #376665, tertiary: #65558d, error: #ba1a1a, neutral: #717878, neutral-variant: #6c7a79 */
+
+/* Light Theme */
+:root,
+:host {
+  @include mat.form-field-density(-2);
+
+  @include mat.form-field-overrides(
+    (
+      outlined-outline-color: #efefef,
+      outlined-focus-outline-color: #efefef,
+      outlined-disabled-outline-color: #efefef,
+      outlined-hover-outline-color: #efefef,
+      outlined-error-hover-outline-color: #efefef,
+      outlined-error-outline-color: #efefef,
+      outlined-error-focus-outline-color: #efefef,
+      container-height: 20px
+    )
+  );
+
+  color-scheme: light;
+  @include mat.theme(
+    (
+      color: mat.$spring-green-palette,
+    )
+  );
+}

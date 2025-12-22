@@ -1,0 +1,9 @@
+<mat-card appearance="outlined">
+  <mat-card-content>
+    <mat-icon>{{ icon() }}</mat-icon>
+    <div class="card-content">
+      <p>{{cardtitle()}}</p>
+      <span>{{cardValue() | currency: 'BRL'}}</span>
+    </div>
+  </mat-card-content>
+</mat-card>

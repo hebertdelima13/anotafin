@@ -1,0 +1,17 @@
+@use './app/shared/assets/scss/material';
+
+* {
+  box-sizing: border-box;
+  list-style: none !important;
+  text-decoration: none !important;
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+}
+
+.mat-mdc-form-field-subscript-wrapper {
+  display: block;
+  height: 0;
+  margin: 0;
+  padding: 0;
+}

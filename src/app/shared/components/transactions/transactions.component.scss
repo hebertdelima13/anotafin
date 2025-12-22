@@ -1,0 +1,51 @@
+@use '../../assets/scss/mixins' as *;
+
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+
+  table {
+    margin-top: 1rem;
+
+    th {
+      font-weight: 600;
+    }
+
+    mat-form-field {
+      font-size: 12px;
+      color: #000;
+      width: 150px;
+    }
+
+    .entry,
+    .balance-positive {
+      color: green;
+    }
+
+    .exit,
+    .balance-negative {
+      color: red;
+    }
+
+    .mat-column-actions {
+      min-width: 170px;
+
+      button {
+        height: 35px;
+        width: 35px;
+      }
+    }
+
+    .mat-column-balance {
+      min-width: 110px;
+    }
+
+    .row-paid {
+      opacity: 0.5;
+    }
+  }
+}
+
+button {
+  margin: 0 0.25rem;
+}

@@ -1,0 +1,8 @@
+@for (item of months; track $index) {
+<button
+  (click)="setActive($index)"
+  [matButton]="transactionStore.selectedMonth() === $index ? 'filled' : 'outlined'"
+>
+  {{ item }}
+</button>
+}

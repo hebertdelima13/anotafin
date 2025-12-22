@@ -1,0 +1,25 @@
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 0;
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  mat-icon {
+    cursor: pointer;
+    margin: 0 1rem;
+
+    &:hover {
+      color: #006d33;
+    }
+  }
+
+  button {
+    background: none;
+    border: none;
+    padding: 0;
+  }
+}

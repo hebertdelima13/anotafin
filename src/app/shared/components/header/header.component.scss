@@ -1,0 +1,43 @@
+header {
+  background-color: #f8f8f8;
+  padding: 1rem;
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 1280px;
+
+    .header-left {
+      display: flex;
+      align-items: center;
+
+      mat-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #006d33;
+        color: #fff;
+        font-size: 2rem;
+        height: 3rem;
+        width: 3rem;
+        border-radius: 0.5rem;
+      }
+
+      .header-text {
+        display: flex;
+        flex-direction: column;
+        margin-left: 1rem;
+
+        h1 {
+          font-weight: 900;
+        }
+
+        span {
+          font-size: 0.8rem;
+        }
+      }
+    }
+  }
+}

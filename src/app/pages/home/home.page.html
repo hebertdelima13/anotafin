@@ -1,0 +1,30 @@
+@if (isLoading()) {
+<div class="container-spinner">
+  <mat-spinner></mat-spinner>
+</div>
+} @else {
+<app-header />
+<main class="container">
+  <app-year />
+  <app-months />
+  <div class="cards">
+    <app-cards
+      [icon]="iconSaldos"
+      [cardtitle]="cardTitleSaldoAnterior"
+      [cardValue]="cardValueSaldoAnterior()"
+    />
+    <app-cards
+      [icon]="iconEntrada"
+      [cardtitle]="cardTitleEntrada"
+      [cardValue]="cardValueEntrada()"
+    />
+    <app-cards [icon]="iconSaida" [cardtitle]="cardTitleSaida" [cardValue]="cardValueSaida()" />
+    <app-cards
+      [icon]="iconSaldos"
+      [cardtitle]="cardTitleSaldoFinal"
+      [cardValue]="carValueSaldoFinal()"
+    />
+  </div>
+  <app-transactions />
+</main>
+}

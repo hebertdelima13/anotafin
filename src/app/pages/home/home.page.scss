@@ -1,0 +1,25 @@
+@use '../../shared/assets/scss/mixins' as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  max-width: 1280px;
+  margin: 0 auto;
+
+  .cards {
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem 0 3rem 0;
+
+    @include md {
+      flex-direction: column;
+    }
+  }
+}
+
+.container-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
